@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>leapfrog_ros_gazebo</name>
+  <version>0.0.1</version>
+  <description>The leapfrog_ros_gazebo package</description>
+
+  <maintainer email="garrett.gibo@gmail.com">garrett</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>leapfrog_description</exec_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+    <gazebo_ros plugin_path="${prefix}/../../lib" gazebo_media_path="${prefix}" />
+
+  </export>
+</package>
