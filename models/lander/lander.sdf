@@ -2251,7 +2251,15 @@
     <allow_auto_disable>1</allow_auto_disable>
 
     <!-- Plugins -->
-    <plugin name="gazebo_controller" filename="libgazebo_controller.so"/>
+    <plugin name="gazebo_interface" filename="libgazebo_interface.so">
+      <thruster_1>thruster_1</thruster_1>
+      <thruster_2>thruster_2</thruster_2>
+      <thruster_3>thruster_3</thruster_3>
+      <thruster_4>thruster_4</thruster_4>
+      <actuator_1>actuator_1_inner</actuator_1>
+      <actuator_2>actuator_2_inner</actuator_2>
+      <engine>gimbal_ring_inner</engine>
+    </plugin>
 
   </model>
 </sdf>

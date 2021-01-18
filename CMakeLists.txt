@@ -11,7 +11,10 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(gazebo REQUIRED)
 
 link_directories(${GAZEBO_LIBRARY_DIRS})
-include_directories(${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
+include_directories(include
+  ${Boost_INCLUDE_DIR}
+  ${catkin_INCLUDE_DIRS}
+  ${GAZEBO_INCLUDE_DIRS})
 
 catkin_package(
   DEPENDS
@@ -19,5 +22,5 @@ catkin_package(
     gazebo_ros
 )
 
-add_library(gazebo_controller src/gazebo_controller.cpp)
-target_link_libraries(gazebo_controller ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+add_library(gazebo_interface src/gazebo_interface.cpp)
+target_link_libraries(gazebo_interface ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
