@@ -11,13 +11,5 @@
       <uri>model://sun</uri>
     </include>
 
-    <!-- Our custom model -->
-    <include>
-      <uri>model://lander</uri>
-      <pose>0 0 1 0 0 0</pose>
-    </include>
-
-    <!-- Reference to plugin -->
-
   </world>
 </sdf>
