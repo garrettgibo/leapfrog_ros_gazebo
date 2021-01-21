@@ -1626,22 +1626,6 @@
       </visual>
     </link>
 
-    <link name='lander/airspeed_link'>
-      <pose>0 0 0.75 0 -0 0</pose>
-      <inertial>
-	<pose>0 0 0 0 -0 0</pose>
-	<mass>0.015</mass>
-	<inertia>
-	  <ixx>1e-05</ixx>
-	  <ixy>0</ixy>
-	  <ixz>0</ixz>
-	  <iyy>1e-05</iyy>
-	  <iyz>0</iyz>
-	  <izz>1e-05</izz>
-	</inertia>
-      </inertial>
-      <self_collide>0</self_collide>
-    </link>
     <link name='lander/imu_link'>
       <pose>0 0 0.75 -0 -0 -0.09</pose>
       <inertial>
@@ -1656,72 +1640,95 @@
 	  <izz>1e-05</izz>
 	</inertia>
       </inertial>
+
+      <!-- IMU -->
       <sensor name='lander_imu' type='imu'>
 	<always_on>1</always_on>
 	<imu/>
+	<update_rate>100</update_rate>
+	<visualize>true</visualize>
+	<topic>imu</topic>
+	<plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+	  <topicName>imu</topicName>
+	  <bodyName>lander/imu_link</bodyName>
+	  <updateRateHZ>10.0</updateRateHZ>
+	  <gaussianNoise>0.0</gaussianNoise>
+	  <xyzOffset>0 0 0</xyzOffset>
+	  <rpyOffset>0 0 0</rpyOffset>
+	  <frameName>lander/imu_link</frameName>
+	  <initialOrientationAsReference>false</initialOrientationAsReference>
+	</plugin>
       </sensor>
       <self_collide>0</self_collide>
       <gravity>1</gravity>
     </link>
-    <include>
-      <uri>model://gps</uri>
-      <pose>0 0 0.75 0 0 0</pose>
-      <name>gps</name>
-    </include>
-    <joint name='gps_joint' type='fixed'>
-      <child>gps::link</child>
-      <parent>base</parent>
-    </joint>
-    <joint name='lander/airspeed_joint' type='revolute'>
-      <parent>base</parent>
-      <child>lander/airspeed_link</child>
-      <pose>0 0 0 0 -0 0</pose>
-      <axis>
-	<xyz>1 0 0</xyz>
-	<use_parent_model_frame>1</use_parent_model_frame>
-	<limit>
-	  <lower>0</lower>
-	  <upper>0</upper>
-	  <effort>0</effort>
-	  <velocity>0</velocity>
-	</limit>
-	<dynamics>
-	  <spring_reference>0</spring_reference>
-	  <spring_stiffness>0</spring_stiffness>
-	  <damping>0</damping>
-	  <friction>0</friction>
-	</dynamics>
-      </axis>
-      <physics>
-	<ode>
-	  <limit>
-	    <cfm>0</cfm>
-	    <erp>0.2</erp>
-	  </limit>
-	  <suspension>
-	    <cfm>0</cfm>
-	    <erp>0.2</erp>
-	  </suspension>
-	</ode>
-      </physics>
-    </joint>
     <joint name='lander/imu_joint' type='fixed'>
       <parent>base</parent>
       <child>lander/imu_link</child>
       <pose>0 0 0 0 -0 0</pose>
-      <physics>
-	<ode>
-	  <limit>
-	    <cfm>0</cfm>
-	    <erp>0.2</erp>
-	  </limit>
-	  <suspension>
-	    <cfm>0</cfm>
-	    <erp>0.2</erp>
-	  </suspension>
-	</ode>
-      </physics>
     </joint>
+
+    <!-- GPS -->
+    <!-- <include> -->
+    <!--   <uri>model://gps</uri> -->
+    <!--   <pose>0 0 0.75 0 0 0</pose> -->
+    <!--   <name>gps</name> -->
+    <!-- </include> -->
+    <!-- <joint name='gps_joint' type='fixed'> -->
+    <!--   <child>gps::link</child> -->
+    <!--   <parent>base</parent> -->
+    <!-- </joint> -->
+
+    <!-- airspeed sensor -->
+    <!-- <link name='lander/airspeed_link'> -->
+    <!--   <pose>0 0 0.75 0 -0 0</pose> -->
+    <!--   <inertial> -->
+    <!-- 	<pose>0 0 0 0 -0 0</pose> -->
+    <!-- 	<mass>0.015</mass> -->
+    <!-- 	<inertia> -->
+    <!-- 	  <ixx>1e-05</ixx> -->
+    <!-- 	  <ixy>0</ixy> -->
+    <!-- 	  <ixz>0</ixz> -->
+    <!-- 	  <iyy>1e-05</iyy> -->
+    <!-- 	  <iyz>0</iyz> -->
+    <!-- 	  <izz>1e-05</izz> -->
+    <!-- 	</inertia> -->
+    <!--   </inertial> -->
+    <!--   <self_collide>0</self_collide> -->
+    <!-- </link> -->
+    <!-- <joint name='lander/airspeed_joint' type='revolute'> -->
+    <!--   <parent>base</parent> -->
+    <!--   <child>lander/airspeed_link</child> -->
+    <!--   <pose>0 0 0 0 -0 0</pose> -->
+    <!--   <axis> -->
+    <!-- 	<xyz>1 0 0</xyz> -->
+    <!-- 	<use_parent_model_frame>1</use_parent_model_frame> -->
+    <!-- 	<limit> -->
+    <!-- 	  <lower>0</lower> -->
+    <!-- 	  <upper>0</upper> -->
+    <!-- 	  <effort>0</effort> -->
+    <!-- 	  <velocity>0</velocity> -->
+    <!-- 	</limit> -->
+    <!-- 	<dynamics> -->
+    <!-- 	  <spring_reference>0</spring_reference> -->
+    <!-- 	  <spring_stiffness>0</spring_stiffness> -->
+    <!-- 	  <damping>0</damping> -->
+    <!-- 	  <friction>0</friction> -->
+    <!-- 	</dynamics> -->
+    <!--   </axis> -->
+    <!--   <physics> -->
+    <!-- 	<ode> -->
+    <!-- 	  <limit> -->
+    <!-- 	    <cfm>0</cfm> -->
+    <!-- 	    <erp>0.2</erp> -->
+    <!-- 	  </limit> -->
+    <!-- 	  <suspension> -->
+    <!-- 	    <cfm>0</cfm> -->
+    <!-- 	    <erp>0.2</erp> -->
+    <!-- 	  </suspension> -->
+    <!-- 	</ode> -->
+    <!--   </physics> -->
+    <!-- </joint> -->
 
 
     <joint name='actuator_1_inner__actuator_1_mount_front__ball' type='ball'>
